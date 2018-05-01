@@ -15,7 +15,7 @@ $ npm install --save-dev node_populate
 On your test file (I'll be using Jasmine for this example):
 
 ```
-const Populate = require('populate');
+const Populate = require('node-populate');
 
 const populate = new Populate({
     db: 'mysql',
