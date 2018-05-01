@@ -1,0 +1,34 @@
+{
+  "name": "populate",
+  "version": "1.0.0",
+  "description": "Populate database",
+  "main": "src/populate.js",
+  "scripts": {
+    "test": "MYSQL_DATABASE=populate_test jasmine",
+    "cover": "MYSQL_DATABASE=populate_test istanbul cover jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rtpaulino/populate.git"
+  },
+  "keywords": [
+    "mysql",
+    "database",
+    "populate",
+    "test"
+  ],
+  "author": "Rafael Paulino rafaelpaulino at gmail dot com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rtpaulino/populate/issues"
+  },
+  "homepage": "https://github.com/rtpaulino/populate#readme",
+  "devDependencies": {
+    "istanbul": "^1.1.0-alpha.1",
+    "jasmine": "^3.1.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.10",
+    "mysql": "^2.15.0"
+  }
+}

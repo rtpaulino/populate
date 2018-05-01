@@ -1,0 +1,9 @@
+[
+    {
+        "table": "test",
+        "data": [
+            { "id": 1, "description": "test 1" },
+            { "id": 2, "description": "test 2" }
+        ]
+    }
+]
