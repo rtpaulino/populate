@@ -46,7 +46,7 @@ class Populate {
         }
 
         return async () => {
-            this.cleanup(data);
+            await this.cleanup(data);
         };
     }
 

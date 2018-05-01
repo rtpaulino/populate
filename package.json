@@ -1,6 +1,6 @@
 {
   "name": "node-populate",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Populate database",
   "main": "src/populate.js",
   "scripts": {

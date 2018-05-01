@@ -1,6 +1,8 @@
 const path = require('path');
 const Populate = require('../src/populate');
 
+const MySQL = require('../src/db/mysql');
+
 describe('Populate', function () {
 
     it('All In One Test with MySQL', $(async function () {
@@ -8,15 +10,35 @@ describe('Populate', function () {
             db: 'mysql'
         });
 
-        await populate.execFile(path.join(__dirname, 'support', 'schema.sql'));
+        let cleanup, results;
 
-        // test that table is empty
+        let mysql = new MySQL();
 
-        let cleanup = await populate.fromFile(path.join(__dirname, 'support', 'data.json'));
+        let conn = await mysql.getConnection();
+        try {
 
-        // test that table has correct data
+            await populate.execFile(path.join(__dirname, 'support', 'schema.sql'));
 
-        await cleanup();
+            results = await mysql.query(conn, 'SELECT * FROM test');
+            expect(results.length).toBe(0);
+
+            cleanup = await populate.fromFile(path.join(__dirname, 'support', 'data.json'));
+
+            results = await mysql.query(conn, 'SELECT * FROM test ORDER BY id');
+            expect(JSON.parse(JSON.stringify(results))).toEqual([
+                { id: 1, description: 'test 1' },
+                { id: 2, description: 'test 2' }
+            ]);
+
+        } finally {
+            if (cleanup) {
+                await cleanup();
+
+                results = await mysql.query(conn, 'SELECT * FROM test');
+                expect(results.length).toBe(0);
+            }
+            await mysql.close(conn);
+        }
 
         // test that table is empty again
     }));
