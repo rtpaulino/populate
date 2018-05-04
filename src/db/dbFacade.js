@@ -26,7 +26,7 @@ class DbFacade {
     }
 
     async truncate(conn, tableName) {
-        await this.query(conn, `TRUNCATE TABLE ${tableName}`);
+        await this.query(conn, `DELETE FROM ${tableName}`);
     }
 
     async insert(conn, tableName, data) {
