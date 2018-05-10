@@ -32,11 +32,13 @@ class Populate {
         return await this.populate(await readJson(filename));
     }
 
-    async populate(data) {
+    async populate(data, cleanupBefore = true) {
         let conn = await this._db.getConnection();
 
         try {
-            await this._cleanup(conn, data);
+            if (cleanupBefore) {
+                await this._cleanup(conn, data);
+            }
 
             for (let d of data) {
                 this._db.insert(conn, d.table, d.data);
